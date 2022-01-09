@@ -1,4 +1,10 @@
 package TwitterApp.TwitterApp;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -10,55 +16,104 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
+import com.google.gson.JsonSyntaxException;
+
+import TwitterApp.TwitterApp.Controller.ParseJson;
+import TwitterApp.TwitterApp.Modello.Tweet;
+import TwitterApp.TwitterApp.Modello.Profilo;
+
+
 
 /* questa classe mi da:
  * 
- * 1) la data in cui e' stato creato il post 
- * 2)l'id del post
- * 3) il testo del post
- * tutto informato json (nella console )
+ * abbiiamo modificato quella classe in modo che permette di ottenere direttamente i post sapendo il username 
  * 
  * */
 public class TwitterApi {
 
-	  public static void main(String args[]) throws IOException, URISyntaxException {
+	 
 	   // dopo aver generato il mio bearer token personale faccio una prova di chiamata 
 		  
-		  final String bearerToken = "AAAAAAAAAAAAAAAAAAAAAL5HWgEAAAAAU2x9Mlm779lmBQsD53bSErOykbI%3DhoAij03NQp0EomeRIRGANc0YkfLppJqP0i5fuJBAy5ANQDHDnp";
-	    // come prova ho messo l'id (generato tramite un link ) dell'UNIVPM
-	    	// https://tweeterid.com/   il link per generare l'id di un acount Twitter
-	      String response = getTweets("1304170778", bearerToken);
-	      System.out.println(response);
-	  }
+	private final static String bearerToken  = "AAAAAAAAAAAAAAAAAAAAAL5HWgEAAAAAU2x9Mlm779lmBQsD53bSErOykbI%3DhoAij03NQp0EomeRIRGANc0YkfLppJqP0i5fuJBAy5ANQDHDnp";
+		  private final static HttpClient httpClient = HttpClients.custom() // qui abbiamo fatto la configurazione 
+		            .setDefaultRequestConfig(RequestConfig.custom()
+		                    .setCookieSpec(CookieSpecs.STANDARD).build())
+		            .build();
 
 	  // questo metodo chiama la  v2 User Tweet timeline endpoint tramite user id
 	   
-	  private static String getTweets(String userId, String bearerToken) throws IOException, URISyntaxException {
-	    String tweetResponse = null;
+	
 
-	    HttpClient httpCliente = HttpClients.custom()
-	        .setDefaultRequestConfig(RequestConfig.custom()
-	            .setCookieSpec(CookieSpecs.STANDARD).build())
-	        .build();
+	    public static Profilo getUserProfile(String username) throws IOException, URISyntaxException,JsonSyntaxException {
+	        URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/by/username/%s", username));
+	        ArrayList<NameValuePair> queryParameters;
+	        queryParameters = new ArrayList<>();
+	        queryParameters.add(new BasicNameValuePair("user.fields", "created_at,description,pinned_tweet_id"));
+	        uriBuilder.addParameters(queryParameters);
 
-	    URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/%s/tweets", userId));
-	    ArrayList<NameValuePair> parametri;
-	   parametri = new ArrayList<>();
-	   parametri.add(new BasicNameValuePair("tweet.fields", "created_at"));
-	    uriBuilder.addParameters(parametri);
+	        HttpGet httpGet = new HttpGet(uriBuilder.build());
+	        httpGet.setHeader("Authorization", String.format("Bearer %s", bearerToken));
+	        httpGet.setHeader("Content-Type", "application/json");
 
-	    HttpGet httpGet = new HttpGet(uriBuilder.build());
-	    httpGet.setHeader("Authorization", String.format("Bearer %s", bearerToken));
-	    httpGet.setHeader("Content-Type", "application/json");
+	        HttpResponse response = httpClient.execute(httpGet);
+	        HttpEntity entity = response.getEntity();
+	        if(response.getStatusLine().getStatusCode() !=200) {
+	        	return null;
+	        }        
 
-	    HttpResponse response = httpCliente.execute(httpGet);
-	    HttpEntity entity = response.getEntity();
-	    if (null != entity) {
-	      tweetResponse = EntityUtils.toString(entity, "UTF-8");
+	        if (entity != null) {
+	            String jsonResponse = EntityUtils.toString(entity, "UTF-8");
+	            // e' una eccezione quando l'utente non ha nessun post
+	          //  if (jsonResponse==null) {throw new NullPointerException("no posts to show");
+	            // }
+	          try {
+	        	  return ParseJson.profile(jsonResponse);
+	          }catch (JsonSyntaxException error) {
+	        	  return null;
+	          }
+	          
+	        }
+
+	        return null;
 	    }
-	    return tweetResponse;
-	  }
+
+
+	    public static List<Tweet> getTweets(String username) throws IOException, URISyntaxException {
+	        Profilo twitterProfile = getUserProfile(username);
+
+	        if (twitterProfile == null) {
+	            throw new IllegalArgumentException("Username not found");
+	        }
+
+	        String userId = Objects.requireNonNull(getUserProfile(username)).getId();
+
+	        HttpClient httpClient = HttpClients.custom()
+	                .setDefaultRequestConfig(RequestConfig.custom()
+	                        .setCookieSpec(CookieSpecs.STANDARD).build())
+	                .build();
+
+	        URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/%s/tweets", userId));
+	        ArrayList<NameValuePair> queryParameters;
+	        queryParameters = new ArrayList<>();
+	        queryParameters.add(new BasicNameValuePair("tweet.fields", "created_at"));
+	        queryParameters.add(new BasicNameValuePair( "max_results", "10")); // qui come prova abbiamo messo soltanto 10 post
+
+	        
+	        uriBuilder.addParameters(queryParameters);
+
+	        HttpGet httpGet = new HttpGet(uriBuilder.build());
+	        httpGet.setHeader("Authorization", String.format("Bearer %s", bearerToken));
+	        httpGet.setHeader("Content-Type", "application/json");
+
+	        HttpResponse response = httpClient.execute(httpGet);
+	        HttpEntity entity = response.getEntity();
+
+	        if (entity != null) {
+	            String json = EntityUtils.toString(entity, "UTF-8");
+	      
+	            return ParseJson.tweets(json);
+	        }
+
+	        return null;
+	    }
 	}
