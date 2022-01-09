@@ -35,6 +35,8 @@ public class ParseJson {
     public static List<Tweet> tweets(String json) {
 
         var parsedJson = JsonParser.parseString(json).getAsJsonObject();
+        String Prova =parsedJson.get("data").toString();
+        System.out.println(Prova +"gfcrtcvcrchcht trfytrfyf  trftrf");
 
         List<Tweet> tweets = new ArrayList<>();
 

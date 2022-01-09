@@ -110,6 +110,7 @@ public class TwitterApi {
 
 	        if (entity != null) {
 	            String json = EntityUtils.toString(entity, "UTF-8");
+	            System.out.println(json);
 	      
 	            return ParseJson.tweets(json);
 	        }
