@@ -52,13 +52,6 @@ public class Profilo {
 	        this.name = name;
 	    }
 
-	    @Override
-	    public String toString() {
-	        return "TwitterProfile{" +
-	                "id='" + id + '\'' +
-	              //", createdAt='" + createdAt + '\'' +
-	              //  ", username='" + username + '\'' +
-	               // ", name='" + name + '\'' +
-	                '}';
+	   
 	    }
-	}
+	
