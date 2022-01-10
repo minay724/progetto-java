@@ -96,7 +96,7 @@ public class TwitterApi {
 	        ArrayList<NameValuePair> queryParameters;
 	        queryParameters = new ArrayList<>();
 	        queryParameters.add(new BasicNameValuePair("tweet.fields", "created_at"));
-	        queryParameters.add(new BasicNameValuePair( "max_results", "10")); // qui come prova abbiamo messo soltanto 10 post
+	        queryParameters.add(new BasicNameValuePair( "max_results", "100")); // qui come prova abbiamo messo soltanto 10 post
 
 	        
 	        uriBuilder.addParameters(queryParameters);
@@ -110,11 +110,15 @@ public class TwitterApi {
 
 	        if (entity != null) {
 	            String json = EntityUtils.toString(entity, "UTF-8");
-	            System.out.println(json);
-	      
-	            return ParseJson.tweets(json);
+
+				try {
+					return ParseJson.tweets(json);
+				} catch( Exception e) {
+					return null;
+				}
 	        }
 
 	        return null;
 	    }
 	}
+	

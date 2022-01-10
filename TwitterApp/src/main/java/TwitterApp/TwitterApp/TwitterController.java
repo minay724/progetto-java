@@ -1,8 +1,10 @@
 package TwitterApp.TwitterApp;
 
+import TwitterApp.TwitterApp.Modello.Tweet;
 import TwitterApp.TwitterApp.Modello.User;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 //import org.springframework.http.HttpStatus;
 //import org.springframework.http.ResponseEntity;
@@ -36,15 +38,33 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 	 JsonObject innerObject = new JsonObject();
 	 
 	innerObject.addProperty("Total_number_of_mentions:", user.totNumOfMentions());
+	innerObject.addProperty("Average_number_of_mentions:", user.mediaMentions());
+		
 	return innerObject.toString();
 	}
 
-	
+	// e' una rotta per 
 	@GetMapping("/tweets") 
-	public String tweets (@RequestParam(value = "userName") String userName) throws IOException, URISyntaxException  {
+	public String tweets (@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentions", defaultValue = "0" ) int minMentions) throws IOException, URISyntaxException  {
+		
 		User user = initUser(userName);
+		
+		 if (user.getListTweets()==null) {
+			return "No tweeets found";
+			}
 		Gson gson = new Gson();
-		String jsonInString = gson.toJson(user.getListTweets());
+		ArrayList<Tweet> arrayTweet= new ArrayList<Tweet>();
+		for (Tweet t: user.getListTweets() ) {
+			
+			if (t.getNumOfMentions()>=minMentions) {
+				arrayTweet.add(t);
+				
+			}
+		}
+		if (arrayTweet.size()==0) {
+		return "Non ci sono tweet con " + minMentions + " o piu' menzioni";	
+		}
+		String jsonInString = gson.toJson(arrayTweet);
 
 		return jsonInString;
 	}

@@ -7,37 +7,60 @@ import java.util.List;
 
 public class User {
 
+
+	private List<Tweet> listTweets;
+	private String userName;
+	private int tweetsCount = 0;
 	
-		
-		private List<Tweet> listTweets;
-		private String userName;
-		
-		
-		public List<Tweet> getListTweets() {
-			return listTweets;
+	
+	public int getTweetsCount() {
+		return tweetsCount;
+	}
+	public void setTweetsCount() {
+		if (listTweets!=null) {
+			
+			this.tweetsCount = listTweets.size();
+			}
+		else {
+			 this.tweetsCount =0;
 		}
-		public void setListTweets() throws IOException, URISyntaxException {
-			this.listTweets = TwitterApi.getTweets(this.userName);
-		}
-		public String getUserName() {
-			return userName;
-		}
-		public void setUserName(String userName) {
-			this.userName = userName;
+	}
+	public List<Tweet> getListTweets() {
+		return listTweets;
+	}
+	public void setListTweets() throws IOException, URISyntaxException {
+		this.listTweets = TwitterApi.getTweets(this.userName);
+		setTweetsCount();
+		
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public int totNumOfMentions() {
+		if (this.listTweets == null) {
+			return 0;
 		}
 		
-		public int totNumOfMentions() {
-			int somma =0;
-			for (Tweet t : this.listTweets) {
-				t.countMentions();
-				somma+=t.getNumOfMentions();
-				
-			     }
-			return somma;
+		int somma =0;
+		for (Tweet t : this.listTweets) {
+			t.countMentions();
+			somma+=t.getNumOfMentions();
+			
+		     }
+		return somma;
+		
+	}
+	public float mediaMentions() {
+		if (this.tweetsCount!=0) {
+		return (float) totNumOfMentions() / this.tweetsCount;
+		}
+		else {return 0;
 			
 		}
 	}
-		
-		
-
-
+}
+	
