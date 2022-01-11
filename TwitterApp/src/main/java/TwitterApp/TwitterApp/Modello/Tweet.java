@@ -8,7 +8,7 @@ import java.util.Map;
  * */
 
 public class Tweet {
-	    private String id;
+	  private String id;
 	    private String text;
 	    private int numOfMentions;
 	    

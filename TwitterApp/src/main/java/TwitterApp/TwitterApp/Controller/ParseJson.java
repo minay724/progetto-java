@@ -23,7 +23,14 @@ public class ParseJson {
         Profilo twitterProfile = new Profilo();
 
         twitterProfile.setId(parsedJson.get("data").get("id"));
+<<<<<<< HEAD
         
+=======
+        twitterProfile.setUsername(parsedJson.get("data").get("username"));
+        twitterProfile.setName(parsedJson.get("data").get("name"));
+        twitterProfile.setDescription(parsedJson.get("data").get("description"));
+        twitterProfile.setCreatedAt(parsedJson.get("data").get("created_at"));
+>>>>>>> 0619e274660a9a978391b6debe851b689630e584
 
         return twitterProfile;
     }
@@ -32,6 +39,8 @@ public class ParseJson {
     public static List<Tweet> tweets(String json) {
 
         var parsedJson = JsonParser.parseString(json).getAsJsonObject();
+        String Prova =parsedJson.get("data").toString();
+        System.out.println(Prova +"gfcrtcvcrchcht trfytrfyf  trftrf");
 
         List<Tweet> tweets = new ArrayList<>();
 

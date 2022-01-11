@@ -7,12 +7,8 @@ import java.util.List;
 
 public class User extends Profilo {
 
-
-	private List<Tweet> listTweets;
-	private String userName;
-	private int tweetsCount = 0;
 	
-	
+<<<<<<< HEAD
 	public int getTweetsCount() {
 		return tweetsCount;
 	}
@@ -45,15 +41,14 @@ public class User extends Profilo {
 		if (this.listTweets == null) {
 			return 0;
 		}
+=======
 		
-		int somma =0;
-		for (Tweet t : this.listTweets) {
-			t.countMentions();
-			somma+=t.getNumOfMentions();
-			
-		     }
-		return somma;
+		private List<Tweet> listTweets;
+		private String userName;
+>>>>>>> 0619e274660a9a978391b6debe851b689630e584
 		
+		
+<<<<<<< HEAD
 	}
 	public float mediaMentions() {
 		if (this.tweetsCount!=0) {
@@ -78,3 +73,33 @@ public class User extends Profilo {
             }
         }*/
 	
+=======
+		public List<Tweet> getListTweets() {
+			return listTweets;
+		}
+		public void setListTweets() throws IOException, URISyntaxException {
+			this.listTweets = TwitterApi.getTweets(this.userName);
+		}
+		public String getUserName() {
+			return userName;
+		}
+		public void setUserName(String userName) {
+			this.userName = userName;
+		}
+		
+		public int totNumOfMentions() {
+			int somma =0;
+			for (Tweet t : this.listTweets) {
+				t.countMentions();
+				somma+=t.getNumOfMentions();
+				
+			     }
+			return somma;
+			
+		}
+	}
+		
+		
+
+
+>>>>>>> 0619e274660a9a978391b6debe851b689630e584
