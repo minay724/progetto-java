@@ -28,12 +28,17 @@ public class TwitterController {
 		user.setListTweets();
 		 return user;
 		 }
+	
 
 	
 	@GetMapping("/stats") 
 public String stats (@RequestParam(value = "userName") String userName) throws IOException, URISyntaxException {
-	User user = initUser(userName);
-	
+		User user;
+		try{
+			user= initUser(userName);
+		}catch(IllegalArgumentException error) {
+			return "Username not found";
+		}
 	
 	 JsonObject innerObject = new JsonObject();
 	 
@@ -45,9 +50,15 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 
 	// e' una rotta per 
 	@GetMapping("/tweets") 
-	public String tweets (@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentions", defaultValue = "0" ) int minMentions) throws IOException, URISyntaxException  {
+	public String tweets (@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentions", defaultValue = "0" ) int minMentions) throws IOException, URISyntaxException,IllegalArgumentException  {
 		
-		User user = initUser(userName);
+		User user;
+		try{
+			user= initUser(userName);
+		}catch(IllegalArgumentException error) {
+			return "Username not found";
+		}
+		
 		
 		 if (user.getListTweets()==null) {
 			return "No tweeets found";

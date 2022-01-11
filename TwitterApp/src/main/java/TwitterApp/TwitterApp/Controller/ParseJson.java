@@ -23,10 +23,7 @@ public class ParseJson {
         Profilo twitterProfile = new Profilo();
 
         twitterProfile.setId(parsedJson.get("data").get("id"));
-        //twitterProfile.setUsername(parsedJson.get("data").get("username"));
-        //twitterProfile.setName(parsedJson.get("data").get("name"));
-        //twitterProfile.setDescription(parsedJson.get("data").get("description"));
-       // twitterProfile.setCreatedAt(parsedJson.get("data").get("created_at"));
+        
 
         return twitterProfile;
     }

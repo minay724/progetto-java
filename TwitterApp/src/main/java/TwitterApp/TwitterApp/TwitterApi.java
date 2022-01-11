@@ -46,9 +46,12 @@ public class TwitterApi {
 
 	    public static Profilo getUserProfile(String username) throws IOException, URISyntaxException,JsonSyntaxException {
 	        URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/by/username/%s", username));
+	        
+	      //https://api.twitter.com/2/users/by/username/"nasa"
+	        
 	        ArrayList<NameValuePair> queryParameters;
 	        queryParameters = new ArrayList<>();
-	        queryParameters.add(new BasicNameValuePair("user.fields", "created_at,description,pinned_tweet_id"));
+	        queryParameters.add(new BasicNameValuePair("user.fields", "pinned_tweet_id"));
 	        uriBuilder.addParameters(queryParameters);
 
 	        HttpGet httpGet = new HttpGet(uriBuilder.build());
@@ -63,9 +66,7 @@ public class TwitterApi {
 
 	        if (entity != null) {
 	            String jsonResponse = EntityUtils.toString(entity, "UTF-8");
-	            // e' una eccezione quando l'utente non ha nessun post
-	          //  if (jsonResponse==null) {throw new NullPointerException("no posts to show");
-	            // }
+	         
 	          try {
 	        	  return ParseJson.profile(jsonResponse);
 	          }catch (JsonSyntaxException error) {
@@ -79,11 +80,12 @@ public class TwitterApi {
 
 
 	    public static List<Tweet> getTweets(String username) throws IOException, URISyntaxException {
-	        Profilo twitterProfile = getUserProfile(username);
+	       Profilo twitterProfile = getUserProfile(username);
 
-	        if (twitterProfile == null) {
-	            throw new IllegalArgumentException("Username not found");
+	       if (twitterProfile == null) {
+	            throw new IllegalArgumentException("Username nooooot found");
 	        }
+	       
 
 	        String userId = Objects.requireNonNull(getUserProfile(username)).getId();
 
@@ -95,7 +97,7 @@ public class TwitterApi {
 	        URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/%s/tweets", userId));
 	        ArrayList<NameValuePair> queryParameters;
 	        queryParameters = new ArrayList<>();
-	        queryParameters.add(new BasicNameValuePair("tweet.fields", "created_at"));
+	       
 	        queryParameters.add(new BasicNameValuePair( "max_results", "100")); // qui come prova abbiamo messo soltanto 10 post
 
 	        

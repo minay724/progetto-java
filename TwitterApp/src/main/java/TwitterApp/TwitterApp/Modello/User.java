@@ -5,7 +5,7 @@ import TwitterApp.TwitterApp.TwitterApi;
 
 import java.util.List;
 
-public class User {
+public class User extends Profilo {
 
 
 	private List<Tweet> listTweets;
@@ -30,8 +30,9 @@ public class User {
 	}
 	public void setListTweets() throws IOException, URISyntaxException {
 		this.listTweets = TwitterApi.getTweets(this.userName);
+	
 		setTweetsCount();
-		
+
 	}
 	public String getUserName() {
 		return userName;
@@ -56,11 +57,24 @@ public class User {
 	}
 	public float mediaMentions() {
 		if (this.tweetsCount!=0) {
-		return (float) totNumOfMentions() / this.tweetsCount;
+		return (float) totNumOfMentions() / this.tweetsCount; // qua abbiamo fatto il casting perche' non sono float
 		}
-		else {return 0;
+		else {
+			return 0;
 			
 		}
 	}
+	
 }
+
+/*String mostMentionedUser = null;
+        int totalNumberOfMentions = 0;
+
+        for (var mentionedUsername :
+                allMentions.keySet()) {
+            if (allMentions.get(mentionedUsername) > totalNumberOfMentions) {
+                totalNumberOfMentions = allMentions.get(mentionedUsername);
+                mostMentionedUser = mentionedUsername;
+            }
+        }*/
 	
