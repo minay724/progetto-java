@@ -77,4 +77,36 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 
 		return jsonInString;
 	}
+	@GetMapping("/mentioned") 
+	public String mentioned (@RequestParam(value = "userName") String userName, @RequestParam(value = "userName2" ) String userName2) throws IOException, URISyntaxException,IllegalArgumentException  {
+		
+		User user;
+		try{
+			user= initUser(userName);
+			
+		}catch(IllegalArgumentException error) {
+			return "Username not found";
+		}
+		
+		
+		 if (user.getListTweets()==null) {
+			return "No tweeets found";
+			}
+		 
+		 user.setAllMentioned();
+		for (Map.Entry<String, Integer> entry : user.getAllMentioned().entrySet()) {
+
+			String nomeUtente=entry.getKey();
+			int numberOfMentions=entry.getValue() ;
+			if (nomeUtente.toLowerCase().equals(userName2.toLowerCase())) {
+				 
+				return userName2+" e' stato menzionato "+ numberOfMentions  + " volte";
+			}
+			
+				
+			
+		}
+		return userName2+" e' stato menzionato 0 volte";
+	}
+
 }
