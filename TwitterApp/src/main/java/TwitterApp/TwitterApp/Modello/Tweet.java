@@ -55,10 +55,16 @@ public class Tweet {
 
 	    public void countMentions() {
 	        Map<String, Integer> mentions = new HashMap<String, Integer>();
+	        
+	        String[] specialChars = {".", ",",":"};
 
-	        for (var word :
+	        for (String word :
 	                this.text.split("\\s+")) {
 	            if (word.charAt(0) == '@') {
+	            	word=word.substring(1);
+	            	for (String sp: specialChars) {
+	            		word = word.replace(sp, "");
+	            	}
 	                mentions.put(word, mentions.getOrDefault(word, 0) + 1);
 	            }
 	        }

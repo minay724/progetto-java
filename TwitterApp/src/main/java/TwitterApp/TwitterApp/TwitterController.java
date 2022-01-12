@@ -46,7 +46,7 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 	return innerObject.toString();
 	}
 
-	// e' una rotta per mostrare gli ultimi 100 post di un cliente 
+	// e' una rotta per mostrare gli ultimi 100 post di un cliente
 	@GetMapping("/tweets") 
 	public String tweets (@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentions", defaultValue = "0" ) int minMentions) throws IOException, URISyntaxException,IllegalArgumentException  {
 		
@@ -77,6 +77,7 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 
 		return jsonInString;
 	}
+	
 	@GetMapping("/mentioned") 
 	public String mentioned (@RequestParam(value = "userName") String userName, @RequestParam(value = "userName2" ) String userName2) throws IOException, URISyntaxException,IllegalArgumentException  {
 		
