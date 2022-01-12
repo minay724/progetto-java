@@ -97,15 +97,8 @@ public class TwitterApi {
 	        URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/%s/tweets", userId));
 	        ArrayList<NameValuePair> queryParameters;
 	        queryParameters = new ArrayList<>();
-<<<<<<< HEAD
-	       
-	        queryParameters.add(new BasicNameValuePair( "max_results", "100")); // qui come prova abbiamo messo soltanto 10 post
-=======
-	        queryParameters.add(new BasicNameValuePair("tweet.fields", "created_at"));
 	        queryParameters.add(new BasicNameValuePair( "max_results", "10")); // qui come prova abbiamo messo soltanto 10 post
->>>>>>> 0619e274660a9a978391b6debe851b689630e584
 
-	        
 	        uriBuilder.addParameters(queryParameters);
 
 	        HttpGet httpGet = new HttpGet(uriBuilder.build());
@@ -117,7 +110,6 @@ public class TwitterApi {
 
 	        if (entity != null) {
 	            String json = EntityUtils.toString(entity, "UTF-8");
-	            System.out.println(json);
 	      
 	            return ParseJson.tweets(json);
 	        }
