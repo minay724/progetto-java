@@ -18,7 +18,12 @@ import com.google.gson.JsonObject;
 
 public class TwitterController {
 	// questo e' un metodo per inizializzare User (classe)
-	
+	/** 
+	 * @param userName
+	 * @return
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 */
 	private static User initUser(String userName ) throws IOException, URISyntaxException {
 		
 		User user = new User();
@@ -26,11 +31,14 @@ public class TwitterController {
 		user.setListTweets();
 		 return user;
 		 }
-	
-
-	
+	 /**
+	 * @param userName
+	 * @return
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 */
 	@GetMapping("/stats") 
-public String stats (@RequestParam(value = "userName") String userName) throws IOException, URISyntaxException {
+	public String stats (@RequestParam(value = "userName") String userName) throws IOException, URISyntaxException {
 		User user;
 		try{
 			user= initUser(userName);
@@ -47,6 +55,14 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 	}
 
 	// e' una rotta per 
+	/**
+	 * @param userName
+	 * @param minMentions
+	 * @return
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 * @throws IllegalArgumentException
+	 */
 	@GetMapping("/tweets") 
 	public String tweets (@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentions", defaultValue = "0" ) int minMentions) throws IOException, URISyntaxException,IllegalArgumentException  {
 		
@@ -77,6 +93,14 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 
 		return jsonInString;
 	}
+	/**
+	 * @param userName
+	 * @param userName2
+	 * @return
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 * @throws IllegalArgumentException
+	 */
 	@GetMapping("/mentioned") 
 	public String mentioned (@RequestParam(value = "userName") String userName, @RequestParam(value = "userName2" ) String userName2) throws IOException, URISyntaxException,IllegalArgumentException  {
 		

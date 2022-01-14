@@ -1,4 +1,9 @@
+/**
+*@author Zaki/Zeccato
+*/
+
 package TwitterApp.TwitterApp;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -28,22 +33,27 @@ import TwitterApp.TwitterApp.Modello.Profilo;
  * 
  * abbiiamo modificato quella classe in modo che permette di ottenere direttamente i post sapendo il username 
  * 
- * */
+ */
 public class TwitterApi {
-
-	 
-	   // dopo aver generato il mio bearer token personale faccio una prova di chiamata 
-		  
+	// dopo aver generato il mio bearer token personale faccio una prova di chiamata 
+	/*
+	*param bearerToken
+	*param httpClient
+	*/
 	private final static String bearerToken  = "AAAAAAAAAAAAAAAAAAAAAL5HWgEAAAAAU2x9Mlm779lmBQsD53bSErOykbI%3DhoAij03NQp0EomeRIRGANc0YkfLppJqP0i5fuJBAy5ANQDHDnp";
-		  private final static HttpClient httpClient = HttpClients.custom() // qui abbiamo fatto la configurazione 
+	private final static HttpClient httpClient = HttpClients.custom() // qui abbiamo fatto la configurazione 
 		            .setDefaultRequestConfig(RequestConfig.custom()
 		                    .setCookieSpec(CookieSpecs.STANDARD).build())
 		            .build();
 
 	  // questo metodo chiama la  v2 User Tweet timeline endpoint tramite user id
-	   
-	
-
+		/**
+		* @param username
+		* @return
+		* @throws IOException
+		* @throws URISyntaxException
+		* @throws JsonSyntaxException
+		*/
 	    public static Profilo getUserProfile(String username) throws IOException, URISyntaxException,JsonSyntaxException {
 	        URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/by/username/%s", username));
 	        
@@ -78,7 +88,12 @@ public class TwitterApi {
 	        return null;
 	    }
 
-
+	    /**
+	    * @param username
+	    * @return
+	    * @throws IOException
+	    * @throws URISyntaxException
+	    */
 	    public static List<Tweet> getTweets(String username) throws IOException, URISyntaxException {
 	       Profilo twitterProfile = getUserProfile(username);
 

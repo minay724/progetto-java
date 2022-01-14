@@ -9,13 +9,14 @@ import java.util.Map;
 
 public class User {
 
-
 	private List<Tweet> listTweets;
 	private String userName;
 	private int tweetsCount = 0;
 	Map<String, Integer> allMentioned = new HashMap<String, Integer>();//
 	 //private String mostMentionedUser = null; // inizializzato con 0
-	
+	/**
+	 * @return
+	 */
 	public int getTweetsCount() {
 		return tweetsCount;
 	}
@@ -28,49 +29,63 @@ public class User {
 			 this.tweetsCount =0;
 		}
 	}
+	/** 
+	 * @return
+	 */
 	public List<Tweet> getListTweets() {
 		return listTweets;
 	}
+	/**
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 */
 	public void setListTweets() throws IOException, URISyntaxException {
 		this.listTweets = TwitterApi.getTweets(this.userName);
 	
 		setTweetsCount();
-
 	}
+	/**
+	 * @return
+	 */
 	public String getUserName() {
 		return userName;
 	}
+	/**
+	 * @param userName
+	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+	/**
+	 * @return
+	 */
 	public int totNumOfMentions() {
 		if (this.listTweets == null) {
 			return 0;
 		}
-		
 		int somma =0;
 		for (Tweet t : this.listTweets) {
 			t.countMentions();
 			somma+=t.getNumOfMentions();
-			
 		     }
 		return somma;
-		
 	}
+	/**
+	 * @return
+	 */
 	public float mediaMentions() {
 		if (this.tweetsCount!=0) {
 		return (float) totNumOfMentions() / this.tweetsCount;
 		}
 		else {
 			return 0;
-			
 		}
 	}
 /*
  * quel metodo conta quante volte  e' stato menzionato un utente negli ultimi 100 tweet 
  * 
- * */
+ * 
+ */
 	public void setAllMentioned() {
 		for (Tweet t : this.listTweets) {
 			for (Map.Entry<String, Integer> entry : t.getMentions().entrySet()) {
@@ -80,7 +95,9 @@ public class User {
 		    }
 		}
      }
-	
+	/**
+	 * @return
+	 */
 	public Map<String, Integer> getAllMentioned(){
 		return	this.allMentioned;
 	}
