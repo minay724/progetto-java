@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,7 +54,6 @@ public class TwitterController {
 		
 	return innerObject.toString();
 	}
-
 	// e' una rotta per 
 	/**
 	 * @param userName
@@ -63,6 +63,7 @@ public class TwitterController {
 	 * @throws URISyntaxException
 	 * @throws IllegalArgumentException
 	 */
+	// e' una rotta per mostrare gli ultimi 100 post di un cliente
 	@GetMapping("/tweets") 
 	public String tweets (@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentions", defaultValue = "0" ) int minMentions) throws IOException, URISyntaxException,IllegalArgumentException  {
 		
@@ -132,5 +133,35 @@ public class TwitterController {
 		}
 		return userName2+" e' stato menzionato 0 volte";
 	}
+	
+	@GetMapping("/mostMentioned")  
+	public String mostMentioned(@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentioned" ) int minMentioned) throws IOException, URISyntaxException,IllegalArgumentException  {
+		User user;
+		try{
+			user= initUser(userName);
+			
+		}catch(IllegalArgumentException error) {
+			return "Username not found";
+		}
+		
+		
+		 if (user.getListTweets()==null) {
+			return "No tweeets found";
+			}
+		       
+		        // enter data into hashmap
+		      user.setAllMentioned();
+		        Map<String, Integer> hm1 = user.sortByValue(user.getAllMentioned());
+		 
+		        TreeMap<String, Integer> myNewMap = hm1.entrySet().stream() .limit(minMentioned) .collect(TreeMap::new, (m, e) -> m.put(e.getKey(), e.getValue()), Map::putAll);
+
+		 Gson gson= new Gson();
+		        String jsonInString = gson.toJson(myNewMap);
+
+				return jsonInString;
+			
+				}
+	
+
 
 }

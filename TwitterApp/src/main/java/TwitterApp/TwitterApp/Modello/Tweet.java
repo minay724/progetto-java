@@ -1,5 +1,4 @@
 package TwitterApp.TwitterApp.Modello;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,16 +7,16 @@ import java.util.Map;
  * */
 
 public class Tweet {
-	  private String id;
+	    private String id;
 	    private String text;
 	    private int numOfMentions;
-	    
 	    private Map<String, Integer> mentions;
 	    /**
 	    * @param id
  		* @param text
  		*/
 	    public Tweet(String id, String text) {
+	    	
 	        this.id = id;
 	        this.text = text;
 
@@ -53,6 +52,7 @@ public class Tweet {
 	    public Map<String, Integer> getMentions() {
 	        return mentions;
 	    }
+	    // un metodo per inizializzare NumOfMention
 	    public void initNumOfMentions(){
 	    	this.numOfMentions = this.mentions.values().stream().reduce(0, (acc, el) -> acc + el);
 	    }
@@ -71,10 +71,16 @@ public class Tweet {
 	    }
 	    public void countMentions() {
 	        Map<String, Integer> mentions = new HashMap<String, Integer>();
+	        
+	        String[] specialChars = {".", ",",":", ";"};
 
-	        for (var word :
+	        for (String word :
 	                this.text.split("\\s+")) {
 	            if (word.charAt(0) == '@') {
+	            	word=word.substring(1);
+	            	for (String sp: specialChars) {
+	            		word = word.replace(sp, "");
+	            	}
 	                mentions.put(word, mentions.getOrDefault(word, 0) + 1);
 	            }
 	        }
