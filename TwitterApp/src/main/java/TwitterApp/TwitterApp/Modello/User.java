@@ -3,7 +3,10 @@ import java.net.URISyntaxException;
 import java.io.IOException;
 import TwitterApp.TwitterApp.TwitterApi;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -101,17 +104,33 @@ public class User {
 	public Map<String, Integer> getAllMentioned(){
 		return	this.allMentioned;
 	}
+	// function to sort hashmap by values
+    public  HashMap<String, Integer>
+    sortByValue(Map<String, Integer> map)
+    {
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, Integer> > list
+            = new LinkedList<Map.Entry<String, Integer> >(
+                map.entrySet());
+ 
+        // Sort the list using lambda expression
+        Collections.sort(
+            list,
+            (i1,
+             i2) -> i2.getValue().compareTo(i1.getValue()));
+ 
+        // put data from sorted list to hashmap
+        HashMap<String, Integer> temp
+        = new LinkedHashMap<String, Integer>();
+        for (Map.Entry<String, Integer> aa : list) {
+        	
+        		temp.put(aa.getKey(), aa.getValue());
+        		
+            
+        }
+        return temp;
+    }
 }
 
-/*
-		 * allMentions.put(mentionedUsername,
-		 * allMentions.getOrDefault(mentionedUsername, 0) + 1);
-		 * 
-		 * int totalNumberOfMentions = 0; for (var mentionedUsername :
-		 * allMentions.keySet()) { if (allMentions.get(mentionedUsername) >
-		 * totalNumberOfMentions) { totalNumberOfMentions =
-		 * allMentions.get(mentionedUsername); mostMentionedUser = mentionedUsername; }
-		 * 
-		 * 
-		 * }
-		 */
+
+
