@@ -2,7 +2,6 @@ package TwitterApp.TwitterApp.Modello;
 import java.net.URISyntaxException;
 import java.io.IOException;
 import TwitterApp.TwitterApp.TwitterApi;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -15,10 +14,10 @@ public class User {
 	private List<Tweet> listTweets;
 	private String userName;
 	private int tweetsCount = 0;
-	Map<String, Integer> allMentioned = new HashMap<String, Integer>();//
-	 //private String mostMentionedUser = null; // inizializzato con 0
+	private Map<String, Integer> allMentioned = new HashMap<String, Integer>();//
+	 
 	/**
-	 * @return
+	 * @return tweetsCount
 	 */
 	public int getTweetsCount() {
 		return tweetsCount;
@@ -33,7 +32,7 @@ public class User {
 		}
 	}
 	/** 
-	 * @return
+	 * @return listTweets
 	 */
 	public List<Tweet> getListTweets() {
 		return listTweets;
@@ -60,7 +59,8 @@ public class User {
 		this.userName = userName;
 	}
 	/**
-	 * @return
+	 * e' un metodo per calcolare il numero totale di menzioni
+	 * @return somma
 	 */
 	public int totNumOfMentions() {
 		if (this.listTweets == null) {
@@ -73,8 +73,8 @@ public class User {
 		     }
 		return somma;
 	}
-	/**
-	 * @return
+	/** e' un metodo per calcolare il numero medio dei menzioni  
+	 * @return totNumOfMentions() / this.tweetsCount
 	 */
 	public float mediaMentions() {
 		if (this.tweetsCount!=0) {
@@ -99,27 +99,27 @@ public class User {
 		}
      }
 	/**
-	 * @return
+	 * @return allMentioned
 	 */
 	public Map<String, Integer> getAllMentioned(){
 		return	this.allMentioned;
 	}
-	// function to sort hashmap by values
+	// e' un metodo per ordinare hashmap per valore 
     public  HashMap<String, Integer>
     sortByValue(Map<String, Integer> map)
     {
-        // Create a list from elements of HashMap
+        // creazione di una lista 
         List<Map.Entry<String, Integer> > list
             = new LinkedList<Map.Entry<String, Integer> >(
                 map.entrySet());
  
-        // Sort the list using lambda expression
+        // ordinamento 
         Collections.sort(
             list,
             (i1,
              i2) -> i2.getValue().compareTo(i1.getValue()));
  
-        // put data from sorted list to hashmap
+        // inserimento della data dalla lista al hashmap
         HashMap<String, Integer> temp
         = new LinkedHashMap<String, Integer>();
         for (Map.Entry<String, Integer> aa : list) {

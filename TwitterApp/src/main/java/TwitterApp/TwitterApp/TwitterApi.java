@@ -46,7 +46,7 @@ public class TwitterApi {
 		  /**
 		   * 
 		   * @param username
-		   * @return
+		   * @return Profilo
 		   * @throws IOException
 		   * @throws URISyntaxException
 		   * @throws JsonSyntaxException
@@ -54,7 +54,6 @@ public class TwitterApi {
 	    public static Profilo getUserProfile(String username) throws IOException, URISyntaxException,JsonSyntaxException {
 	        URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/by/username/%s", username));
 	        
-	      //https://api.twitter.com/2/users/by/username/"nasa"
 	        
 	        ArrayList<NameValuePair> queryParameters;
 	        queryParameters = new ArrayList<>();

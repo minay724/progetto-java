@@ -8,7 +8,7 @@ package TwitterApp.TwitterApp.Modello;
 public class Profilo {
 	   private String id;
 	   /**
-	    * @return
+	    * @return id
 	    */
 	    public String getId() {
 	        return id;
