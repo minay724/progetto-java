@@ -17,6 +17,11 @@ public class Tweet {
  * 1) l'id del post 
  * 2)il testo del post
  * */
+	    /**
+	    * @param id
+ 		* @param text
+ 		*/
+
 	    public Tweet(String id, String text) {
 	    	
 	        this.id = id;
@@ -24,41 +29,53 @@ public class Tweet {
 
 	        this.countMentions();
 	    }
-
+	    /**
+	    * @return
+	    */
 	    public String getId() {
 	        return id;
 	    }
-
+	    /**
+	     * @param id
+	     */
 	    public void setId(String id) {
 	        this.id = id;
 	    }
-
+	    /**
+	     * @return
+	     */
 	    public String getText() {
 	        return text;
 	    }
-
+	    /**
+	     * @param text
+	     */
 	    public void setText(String text) {
 	        this.text = text;
 	    }
-
+	    /**
+	     * @return
+	     */
 	    public Map<String, Integer> getMentions() {
 	        return mentions;
 	    }
-	    
 	    // un metodo per inizializzare NumOfMention
-	    
 	    public void initNumOfMentions(){
 	    	this.numOfMentions = this.mentions.values().stream().reduce(0, (acc, el) -> acc + el);
 	    }
-	    
+	    /**
+	     * 
+	     * @param numOfMentions
+	     */
 	    public void setNumOfMentions(int numOfMentions) {
 			this.numOfMentions = numOfMentions;
 		}
-
+	    /**
+	     * @return
+	     */
 		public int getNumOfMentions() {
 	        return this.numOfMentions;
 	    }
-
 	    public void countMentions() {
 	        Map<String, Integer> mentions = new HashMap<String, Integer>();
 	        
@@ -78,11 +95,17 @@ public class Tweet {
 	        this.mentions = mentions;
 	        initNumOfMentions();
 	    }
+
 	    /**
 	     * 
 	     * @param mentions
+
+	    
+	     /**
+	     * @param mentions -> Map contiene username, Integer numero menzioni
 	     */
 	    public void setMentions(Map<String, Integer> mentions) {
 			this.mentions = mentions;
-		}}
+		}
+}
 
