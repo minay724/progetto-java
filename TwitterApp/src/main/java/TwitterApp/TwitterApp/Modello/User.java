@@ -2,6 +2,7 @@ package TwitterApp.TwitterApp.Modello;
 import java.net.URISyntaxException;
 import java.io.IOException;
 import TwitterApp.TwitterApp.TwitterApi;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -11,12 +12,14 @@ import java.util.Map;
 
 public class User {
 
-
 	private List<Tweet> listTweets;
 	private String userName;
 	private int tweetsCount = 0;
-	private HashMap<String, Integer> allMentioned = new HashMap<String, Integer>();
-	
+	Map<String, Integer> allMentioned = new HashMap<String, Integer>();//
+	 //private String mostMentionedUser = null; // inizializzato con 0
+	/**
+	 * @return
+	 */
 	public int getTweetsCount() {
 		return tweetsCount;
 	}
@@ -29,49 +32,63 @@ public class User {
 			 this.tweetsCount =0;
 		}
 	}
+	/** 
+	 * @return
+	 */
 	public List<Tweet> getListTweets() {
 		return listTweets;
 	}
+	/**
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 */
 	public void setListTweets() throws IOException, URISyntaxException {
 		this.listTweets = TwitterApi.getTweets(this.userName);
 	
 		setTweetsCount();
-
 	}
+	/**
+	 * @return
+	 */
 	public String getUserName() {
 		return userName;
 	}
+	/**
+	 * @param userName
+	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+	/**
+	 * @return
+	 */
 	public int totNumOfMentions() {
 		if (this.listTweets == null) {
 			return 0;
 		}
-		
 		int somma =0;
 		for (Tweet t : this.listTweets) {
 			t.countMentions();
 			somma+=t.getNumOfMentions();
-			
 		     }
 		return somma;
-		
 	}
+	/**
+	 * @return
+	 */
 	public float mediaMentions() {
 		if (this.tweetsCount!=0) {
 		return (float) totNumOfMentions() / this.tweetsCount;
 		}
 		else {
 			return 0;
-			
 		}
 	}
 /*
  * quel metodo conta quante volte  e' stato menzionato un utente negli ultimi 100 tweet 
  * 
- * */
+ * 
+ */
 	public void setAllMentioned() {
 		for (Tweet t : this.listTweets) {
 			for (Map.Entry<String, Integer> entry : t.getMentions().entrySet()) {
@@ -80,12 +97,13 @@ public class User {
 				allMentioned.put(nu, allMentioned.getOrDefault(nu, 0) + numberOfMentions);
 		    }
 		}
-		 }
-	
+     }
+	/**
+	 * @return
+	 */
 	public Map<String, Integer> getAllMentioned(){
 		return	this.allMentioned;
 	}
-	
 	// function to sort hashmap by values
     public  HashMap<String, Integer>
     sortByValue(Map<String, Integer> map)
@@ -103,7 +121,7 @@ public class User {
  
         // put data from sorted list to hashmap
         HashMap<String, Integer> temp
-            = new LinkedHashMap<String, Integer>();
+        = new LinkedHashMap<String, Integer>();
         for (Map.Entry<String, Integer> aa : list) {
         	
         		temp.put(aa.getKey(), aa.getValue());
@@ -112,7 +130,7 @@ public class User {
         }
         return temp;
     }
- 
-  
-	        }
-	 
+}
+
+
+
