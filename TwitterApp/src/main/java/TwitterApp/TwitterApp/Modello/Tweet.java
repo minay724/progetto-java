@@ -30,7 +30,7 @@ public class Tweet {
 	        this.countMentions();
 	    }
 	    /**
-	    * @return
+	    * @return id
 	    */
 	    public String getId() {
 	        return id;
@@ -42,7 +42,7 @@ public class Tweet {
 	        this.id = id;
 	    }
 	    /**
-	     * @return
+	     * @return text
 	     */
 	    public String getText() {
 	        return text;
@@ -54,7 +54,7 @@ public class Tweet {
 	        this.text = text;
 	    }
 	    /**
-	     * @return
+	     * @return mentions
 	     */
 	    public Map<String, Integer> getMentions() {
 	        return mentions;
@@ -71,7 +71,7 @@ public class Tweet {
 			this.numOfMentions = numOfMentions;
 		}
 	    /**
-	     * @return
+	     * @return numOfMentions
 	     */
 		public int getNumOfMentions() {
 	        return this.numOfMentions;
