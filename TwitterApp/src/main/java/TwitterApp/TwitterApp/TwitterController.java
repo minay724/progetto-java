@@ -5,8 +5,11 @@ import TwitterApp.TwitterApp.Modello.User;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
+
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +19,6 @@ import com.google.gson.JsonObject;
 
 @RestController
 
-//Classe che gestisce le chiamate Get
 public class TwitterController {
 	// questo e' un metodo per inizializzare User (classe)
 	
@@ -113,6 +115,8 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 	
 	@GetMapping("/mostMentioned")  
 	public String mostMentioned(@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentioned" ) int minMentioned) throws IOException, URISyntaxException,IllegalArgumentException  {
+		
+		
 		User user;
 		try{
 			user= initUser(userName);
@@ -130,17 +134,25 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 		      
 		        // enter data into hashmap
 		      user.setAllMentioned();
-		        Map<String, Integer> hm1 = user.sortByValue(user.getAllMentioned());
+		      
+		        HashMap<String, Integer> hm1 = user.sortByValue(user.getAllMentioned());
+		        int i = 0;
+		        HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>();
+	        for (Map.Entry<String, Integer> aa : hm1.entrySet()) {
+	        		if (i < minMentioned) {
+	        			temp.put(aa.getKey(), aa.getValue());
+	        		}
+	        		i++;
+	            
+	        }
 		 
-		        TreeMap<String, Integer> myNewMap = hm1.entrySet().stream() .limit(minMentioned) .collect(TreeMap::new, (m, e) -> m.put(e.getKey(), e.getValue()), Map::putAll);
-
+		        
 		 Gson gson= new Gson();
-		        String jsonInString = gson.toJson(myNewMap);
+		        String jsonInString = gson.toJson(temp);
 
 				return jsonInString;
 			
 				}
-
 	
 
 

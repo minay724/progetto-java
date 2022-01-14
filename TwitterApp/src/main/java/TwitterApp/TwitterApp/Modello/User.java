@@ -14,7 +14,7 @@ public class User {
 	private List<Tweet> listTweets;
 	private String userName;
 	private int tweetsCount = 0;
-	private Map<String, Integer> allMentioned = new HashMap<String, Integer>();//
+	private HashMap<String, Integer> allMentioned = new HashMap<String, Integer>();//
 	 
 	/**
 	 * @return tweetsCount
@@ -98,30 +98,31 @@ public class User {
 		    }
 		}
      }
+	public HashMap<String, Integer> getAllMentioned(){
+		
+	return this.allMentioned;	
+	}
 	/**
 	 * @return allMentioned
 	 */
-	public Map<String, Integer> getAllMentioned(){
-		return	this.allMentioned;
-	}
-	// e' un metodo per ordinare hashmap per valore 
+	// function to sort hashmap by values
     public  HashMap<String, Integer>
     sortByValue(Map<String, Integer> map)
     {
-        // creazione di una lista 
+        // Create a list from elements of HashMap
         List<Map.Entry<String, Integer> > list
             = new LinkedList<Map.Entry<String, Integer> >(
                 map.entrySet());
  
-        // ordinamento 
+        // Sort the list using lambda expression
         Collections.sort(
             list,
             (i1,
              i2) -> i2.getValue().compareTo(i1.getValue()));
  
-        // inserimento della data dalla lista al hashmap
+        // put data from sorted list to hashmap
         HashMap<String, Integer> temp
-        = new LinkedHashMap<String, Integer>();
+            = new LinkedHashMap<String, Integer>();
         for (Map.Entry<String, Integer> aa : list) {
         	
         		temp.put(aa.getKey(), aa.getValue());
@@ -129,8 +130,8 @@ public class User {
             
         }
         return temp;
-    }
 }
+    }
 
 
 
