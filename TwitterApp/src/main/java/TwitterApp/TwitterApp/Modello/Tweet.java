@@ -11,7 +11,12 @@ public class Tweet {
 	    private String text;
 	    private int numOfMentions;
 	    private Map<String, Integer> mentions;
-
+	    
+	    
+/*Costruttore tweet che prened:
+ * 1) l'id del post 
+ * 2)il testo del post
+ * */
 	    public Tweet(String id, String text) {
 	    	
 	        this.id = id;
@@ -57,7 +62,7 @@ public class Tweet {
 	    public void countMentions() {
 	        Map<String, Integer> mentions = new HashMap<String, Integer>();
 	        
-	        String[] specialChars = {".", ",",":", ";"};
+	        String[] specialChars = {".", ",",":", ";","/","\\"};
 
 	        for (String word :
 	                this.text.split("\\s+")) {
@@ -73,8 +78,10 @@ public class Tweet {
 	        this.mentions = mentions;
 	        initNumOfMentions();
 	    }
-	    
-
+	    /**
+	     * 
+	     * @param mentions
+	     */
 	    public void setMentions(Map<String, Integer> mentions) {
 			this.mentions = mentions;
 		}}

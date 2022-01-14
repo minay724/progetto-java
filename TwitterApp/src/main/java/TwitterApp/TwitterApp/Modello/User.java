@@ -2,8 +2,10 @@ package TwitterApp.TwitterApp.Modello;
 import java.net.URISyntaxException;
 import java.io.IOException;
 import TwitterApp.TwitterApp.TwitterApi;
-
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +15,7 @@ public class User {
 	private List<Tweet> listTweets;
 	private String userName;
 	private int tweetsCount = 0;
-	Map<String, Integer> allMentioned = new HashMap<String, Integer>();//
-	 //private String mostMentionedUser = null; // inizializzato con 0
+	private HashMap<String, Integer> allMentioned = new HashMap<String, Integer>();
 	
 	public int getTweetsCount() {
 		return tweetsCount;
@@ -79,23 +80,39 @@ public class User {
 				allMentioned.put(nu, allMentioned.getOrDefault(nu, 0) + numberOfMentions);
 		    }
 		}
-     }
+		 }
 	
 	public Map<String, Integer> getAllMentioned(){
 		return	this.allMentioned;
 	}
-}
-
-/*
-		 * allMentions.put(mentionedUsername,
-		 * allMentions.getOrDefault(mentionedUsername, 0) + 1);
-		 * 
-		 * int totalNumberOfMentions = 0; for (var mentionedUsername :
-		 * allMentions.keySet()) { if (allMentions.get(mentionedUsername) >
-		 * totalNumberOfMentions) { totalNumberOfMentions =
-		 * allMentions.get(mentionedUsername); mostMentionedUser = mentionedUsername; }
-		 * 
-		 * 
-		 * }
-		 */
-
+	
+	// function to sort hashmap by values
+    public  HashMap<String, Integer>
+    sortByValue(Map<String, Integer> map)
+    {
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, Integer> > list
+            = new LinkedList<Map.Entry<String, Integer> >(
+                map.entrySet());
+ 
+        // Sort the list using lambda expression
+        Collections.sort(
+            list,
+            (i1,
+             i2) -> i2.getValue().compareTo(i1.getValue()));
+ 
+        // put data from sorted list to hashmap
+        HashMap<String, Integer> temp
+            = new LinkedHashMap<String, Integer>();
+        for (Map.Entry<String, Integer> aa : list) {
+        	
+        		temp.put(aa.getKey(), aa.getValue());
+        		
+            
+        }
+        return temp;
+    }
+ 
+  
+	        }
+	 

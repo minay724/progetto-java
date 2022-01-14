@@ -43,7 +43,14 @@ public class TwitterApi {
 	  // questo metodo chiama la  v2 User Tweet timeline endpoint tramite user id
 	   
 	
-
+		  /**
+		   * 
+		   * @param username
+		   * @return
+		   * @throws IOException
+		   * @throws URISyntaxException
+		   * @throws JsonSyntaxException
+		   */
 	    public static Profilo getUserProfile(String username) throws IOException, URISyntaxException,JsonSyntaxException {
 	        URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/by/username/%s", username));
 	        
@@ -78,7 +85,13 @@ public class TwitterApi {
 	        return null;
 	    }
 
-
+	    /**
+	     * 
+	     * @param username
+	     * @return
+	     * @throws IOException
+	     * @throws URISyntaxException
+	     */
 	    public static List<Tweet> getTweets(String username) throws IOException, URISyntaxException {
 	       Profilo twitterProfile = getUserProfile(username);
 
@@ -97,7 +110,7 @@ public class TwitterApi {
 	        URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/%s/tweets", userId));
 	        ArrayList<NameValuePair> queryParameters;
 	        queryParameters = new ArrayList<>();
-	        queryParameters.add(new BasicNameValuePair( "max_results", "10")); // qui come prova abbiamo messo soltanto 10 post
+	        queryParameters.add(new BasicNameValuePair( "max_results", "100")); // qui come prova abbiamo messo soltanto 10 post
 
 	        uriBuilder.addParameters(queryParameters);
 
