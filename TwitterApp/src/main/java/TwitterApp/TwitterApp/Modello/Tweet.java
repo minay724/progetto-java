@@ -2,10 +2,10 @@ package TwitterApp.TwitterApp.Modello;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
- * In questa classe abbiamo creato i metodi (get e sit per l' id ed il testo del post)
- * */
-
+/**
+ * 
+ *In questa classe abbiamo creato i metodi (get e sit per l' id ed il testo del post)
+ */
 public class Tweet {
 	    private String id;
 	    private String text;
@@ -19,8 +19,8 @@ public class Tweet {
 	    * 1) l'id del post;
 	    * 2)il testo del post;
 	    * 
-	    * @param id
- 		* @param text
+	    * @param id l'id dell'account
+ 		* @param text il testo del tweet (post)
  		*/
 
 	    public Tweet(String id, String text) {
@@ -39,7 +39,7 @@ public class Tweet {
 	    }
 	    /**
 	     * 
-	     * @param id
+	     * @param id id ell'account
 	     */
 	    public void setId(String id) {
 	        this.id = id;
@@ -52,7 +52,7 @@ public class Tweet {
 	    }
 	    /**
 	     * 
-	     * @param text
+	     * @param text testo del tweet (post)
 	     */
 	    public void setText(String text) {
 	        this.text = text;
@@ -64,13 +64,16 @@ public class Tweet {
 	    public Map<String, Integer> getMentions() {
 	        return mentions;
 	    }
-	    // un metodo per inizializzare NumOfMention
+	    /**
+	     * 
+	     *un metodo per inizializzare NumOfMention
+	     */
 	    public void initNumOfMentions(){
 	    	this.numOfMentions = this.mentions.values().stream().reduce(0, (acc, el) -> acc + el);
 	    }
 	    /**
 	     * 
-	     * @param numOfMentions
+	     * @param numOfMentions numero di menzioni
 	     */
 	    public void setNumOfMentions(int numOfMentions) {
 			this.numOfMentions = numOfMentions;
@@ -81,6 +84,9 @@ public class Tweet {
 		public int getNumOfMentions() {
 	        return this.numOfMentions;
 	    }
+		/**
+		 *metodo per contare le menzioni  
+		 */
 	    public void countMentions() {
 	        Map<String, Integer> mentions = new HashMap<String, Integer>();
 //sono stati inseriti tutti i caratteri "speciali" che potrebbero causare problemi nella ricerca dell'account menzionato
@@ -100,11 +106,6 @@ public class Tweet {
 	        initNumOfMentions();
 	    }
 
-	    /**
-	     * 
-	     * @param mentions
-
-	    
 	     /**
 	     * @param mentions, Map contiene username, Integer numero menzioni
 	     */

@@ -1,5 +1,4 @@
 package TwitterApp.TwitterApp.Controller;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
@@ -9,9 +8,10 @@ import java.util.Map;
 import TwitterApp.TwitterApp.Modello.Tweet;
 import TwitterApp.TwitterApp.Modello.Profilo;
 
-/*Quella classe trasforma gli oggetti json in oggetti java 
+/**
+ * Quella classe trasforma gli oggetti json in oggetti java
  * 
- * */
+ */
 
 public class ParseJson {
 

@@ -9,6 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * classe permette di fare statistiche e filtri sul time-line di un account
+ */
 public class User {
 
 	private List<Tweet> listTweets;
@@ -22,6 +25,9 @@ public class User {
 	public int getTweetsCount() {
 		return tweetsCount;
 	}
+	/**
+	 * un metodo setTweetsCount
+	 */
 	public void setTweetsCount() {
 		if (listTweets!=null) {
 			
@@ -38,8 +44,8 @@ public class User {
 		return listTweets;
 	}
 	/**
-	 * @throws IOException
-	 * @throws URISyntaxException
+	 * @throws IOException eccezioni 
+	 * @throws URISyntaxException eccezioni 
 	 */
 	public void setListTweets() throws IOException, URISyntaxException {
 		this.listTweets = TwitterApi.getTweets(this.userName);
@@ -53,7 +59,7 @@ public class User {
 		return userName;
 	}
 	/**
-	 * @param userName
+	 * @param userName nome dell'account
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -97,6 +103,10 @@ public class User {
 		    }
 		}
      }
+	/**
+	 * 
+	 * @return allMentioned ritorna allMentioned
+	 */
 	public HashMap<String, Integer> getAllMentioned(){
 		
 	return this.allMentioned;	
@@ -104,7 +114,7 @@ public class User {
 	/**
 	 * metodo per ordinare (per valore) l'hashmap allMentioned
 	 * @param map, allMentioned
-	 * @return
+	 * @return temp ritoena allMentioned ordinato
 	 */
     public  HashMap<String, Integer>
     sortByValue(Map<String, Integer> map)

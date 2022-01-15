@@ -23,17 +23,15 @@ import TwitterApp.TwitterApp.Modello.Tweet;
 import TwitterApp.TwitterApp.Modello.Profilo;
 
 
-
- /* questa classe mi da:
+/**
  * 
- * abbiiamo modificato quella classe in modo che permette di ottenere direttamente i post sapendo il username 
- * 
+ * @author Mina e Nello
+ *Questa classe si usa per fare le chiamate (http request)
  */
 public class TwitterApi {
 
 	 
-	   // dopo aver generato il mio bearer token personale faccio una prova di chiamata 
-		  
+	   // dopo aver generato il mio bearer token personale(dall' acccount twitter developer	  
 	private final static String bearerToken  = "AAAAAAAAAAAAAAAAAAAAAL5HWgEAAAAAU2x9Mlm779lmBQsD53bSErOykbI%3DhoAij03NQp0EomeRIRGANc0YkfLppJqP0i5fuJBAy5ANQDHDnp";
 		  private final static HttpClient httpClient = HttpClients.custom() // qui abbiamo fatto la configurazione 
 		            .setDefaultRequestConfig(RequestConfig.custom()
@@ -41,7 +39,7 @@ public class TwitterApi {
 		            .build();
 	
 		  /**
-		   * questo metodo chiama la  v2 User Tweet timeline endpoint tramite user id
+		   * questo metodo chiama la  v2 di User Tweet timeline endpoint tramite user id
 		   * @param username, prende il nome del profilo
 		   * @return Profilo, ritorna ID profilo
 		   * @throws IOException 
