@@ -142,7 +142,7 @@ public class TwitterController {
 	 * 
 	 * @param userName
 	 * @param numOfMostMentioned, numero di account più menzionati da visualizzare
-	 * @return
+	 * @return jsonInString
 	 * @throws IOException
 	 * @throws URISyntaxException
 	 * @throws IllegalArgumentException
@@ -169,10 +169,10 @@ public class TwitterController {
 		      
 		        HashMap<String, Integer> allMentionedNew = user.sortByValue(user.getAllMentioned());
 		        int i = 0;
-		        HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>();
+		        HashMap<String, Integer> allMentionedCut = new LinkedHashMap<String, Integer>();
 	        for (Map.Entry<String, Integer> aa : allMentionedNew.entrySet()) {
 	        		if (i < numOfMostMentioned) {
-	        			temp.put(aa.getKey(), aa.getValue());
+	        			allMentionedCut.put(aa.getKey(), aa.getValue());
 	        		}
 	        		i++;
 	            
@@ -180,7 +180,7 @@ public class TwitterController {
 		 
 		        
 		 Gson gson= new Gson();
-		        String jsonInString = gson.toJson(temp);
+		        String jsonInString = gson.toJson(allMentionedCut);
 
 				return jsonInString;
 			

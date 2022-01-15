@@ -39,17 +39,14 @@ public class TwitterApi {
 		            .setDefaultRequestConfig(RequestConfig.custom()
 		                    .setCookieSpec(CookieSpecs.STANDARD).build())
 		            .build();
-
-	  // questo metodo chiama la  v2 User Tweet timeline endpoint tramite user id
-	   
 	
 		  /**
-		   * 
+		   * questo metodo chiama la  v2 User Tweet timeline endpoint tramite user id
 		   * @param username, prende il nome del profilo
 		   * @return Profilo, ritorna ID profilo
 		   * @throws IOException 
 		   * @throws URISyntaxException
-		   * @throws JsonSyntaxException, eccezione per Gson che legge o scrive un elemento non valido
+		   * @throws JsonSyntaxException
 		   */
 	    public static Profilo getUserProfile(String username) throws IOException, URISyntaxException,JsonSyntaxException {
 	        URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/by/username/%s", username));

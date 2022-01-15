@@ -47,7 +47,7 @@ public class User {
 		setTweetsCount();
 	}
 	/**
-	 * @return
+	 * @return userName
 	 */
 	public String getUserName() {
 		return userName;
@@ -59,8 +59,8 @@ public class User {
 		this.userName = userName;
 	}
 	/**
-	 * e' un metodo per calcolare il numero totale di menzioni
-	 * @return somma
+	 * è un metodo per calcolare il numero totale di menzioni
+	 * @return somma, ritorna numero totale di menzioni
 	 */
 	public int totNumOfMentions() {
 		if (this.listTweets == null) {
@@ -73,7 +73,8 @@ public class User {
 		     }
 		return somma;
 	}
-	/** e' un metodo per calcolare il numero medio dei menzioni  
+	/** 
+	 * è un metodo per calcolare il numero medio dei menzioni  
 	 * @return totNumOfMentions() / this.tweetsCount
 	 */
 	public float mediaMentions() {
@@ -84,11 +85,9 @@ public class User {
 			return 0;
 		}
 	}
-/*
- * quel metodo conta quante volte  e' stato menzionato un utente negli ultimi 100 tweet 
- * 
- * 
- */
+	/**
+	 * quel metodo conta quante volte  e' stato menzionato un utente negli ultimi 100 tweet 
+	 */
 	public void setAllMentioned() {
 		for (Tweet t : this.listTweets) {
 			for (Map.Entry<String, Integer> entry : t.getMentions().entrySet()) {
@@ -103,24 +102,23 @@ public class User {
 	return this.allMentioned;	
 	}
 	/**
-	 * @return allMentioned
+	 * metodo per ordinare (per valore) l'hashmap allMentioned
+	 * @param map, allMentioned
+	 * @return
 	 */
-	// function to sort hashmap by values
     public  HashMap<String, Integer>
     sortByValue(Map<String, Integer> map)
     {
-        // Create a list from elements of HashMap
+    	// Crezione di una lista dagli elementi di Hashmap
         List<Map.Entry<String, Integer> > list
             = new LinkedList<Map.Entry<String, Integer> >(
                 map.entrySet());
- 
-        // Sort the list using lambda expression
+        //ordinamento lista usando l' "espressione lambda"
         Collections.sort(
             list,
             (i1,
              i2) -> i2.getValue().compareTo(i1.getValue()));
- 
-        // put data from sorted list to hashmap
+        //inserimento degli elementi ordinati nell' hashmap
         HashMap<String, Integer> temp
             = new LinkedHashMap<String, Integer>();
         for (Map.Entry<String, Integer> aa : list) {

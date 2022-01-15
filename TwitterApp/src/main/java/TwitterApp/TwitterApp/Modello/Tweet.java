@@ -13,11 +13,12 @@ public class Tweet {
 	    private Map<String, Integer> mentions;
 	    
 	    
-/*Costruttore tweet che prened:
- * 1) l'id del post 
- * 2)il testo del post
- * */
 	    /**
+	     * 
+	    * Costruttore tweet che prende:
+	    * 1) l'id del post;
+	    * 2)il testo del post;
+	    * 
 	    * @param id
  		* @param text
  		*/
@@ -30,12 +31,14 @@ public class Tweet {
 	        this.countMentions();
 	    }
 	    /**
+	     * 
 	    * @return id
 	    */
 	    public String getId() {
 	        return id;
 	    }
 	    /**
+	     * 
 	     * @param id
 	     */
 	    public void setId(String id) {
@@ -48,12 +51,14 @@ public class Tweet {
 	        return text;
 	    }
 	    /**
+	     * 
 	     * @param text
 	     */
 	    public void setText(String text) {
 	        this.text = text;
 	    }
 	    /**
+	     * 
 	     * @return mentions
 	     */
 	    public Map<String, Integer> getMentions() {
@@ -78,9 +83,8 @@ public class Tweet {
 	    }
 	    public void countMentions() {
 	        Map<String, Integer> mentions = new HashMap<String, Integer>();
-	        
-	        String[] specialChars = {".", ",",":", ";","/","\\"};
-
+//sono stati inseriti tutti i caratteri "speciali" che potrebbero causare problemi nella ricerca dell'account menzionato
+	        String[] specialChars = {".", ",",":", ";","/","\\","_","-"};
 	        for (String word :
 	                this.text.split("\\s+")) {
 	            if (word.charAt(0) == '@') {
@@ -102,7 +106,7 @@ public class Tweet {
 
 	    
 	     /**
-	     * @param mentions -> Map contiene username, Integer numero menzioni
+	     * @param mentions, Map contiene username, Integer numero menzioni
 	     */
 	    public void setMentions(Map<String, Integer> mentions) {
 			this.mentions = mentions;
