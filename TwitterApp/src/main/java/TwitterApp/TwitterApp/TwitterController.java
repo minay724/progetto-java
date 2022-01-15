@@ -18,10 +18,15 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 @RestController
-
 public class TwitterController {
-	// questo e' un metodo per inizializzare User (classe)
 	
+	/**
+	 * questo e' un metodo per inizializzare User (classe)
+	 * @param userName
+	 * @return user
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 */
 	private static User initUser(String userName ) throws IOException, URISyntaxException {
 		
 		User user = new User();
@@ -29,11 +34,15 @@ public class TwitterController {
 		user.setListTweets();
 		 return user;
 		 }
-	
-
-	
+	/**
+	 * è una rotta di tipo get che calcola il numero totale e il numero medio di menzioni 
+	 * @param userName
+	 * @return oggettoJson
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 */
 	@GetMapping("/stats") 
-public String stats (@RequestParam(value = "userName") String userName) throws IOException, URISyntaxException {
+	public String stats (@RequestParam(value = "userName") String userName) throws IOException, URISyntaxException {
 		User user;
 		try{
 			user= initUser(userName);
@@ -41,15 +50,24 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 			return "Username not found";
 		}
 	
-	 JsonObject innerObject = new JsonObject();
+	 JsonObject oggettoJson = new JsonObject();
 	 
-	innerObject.addProperty("Total_number_of_mentions:", user.totNumOfMentions());
-	innerObject.addProperty("Average_number_of_mentions:", user.mediaMentions());
+	oggettoJson.addProperty("Total_number_of_mentions:", user.totNumOfMentions());
+	oggettoJson.addProperty("Average_number_of_mentions:", user.mediaMentions());
 		
-	return innerObject.toString();
+	return oggettoJson.toString();
 	}
 
-	// e' una rotta per mostrare gli ultimi 100 post di un cliente
+	
+	/**
+	 * e' una rotta di tipo get che trova gli ultimi 100 post di un account
+	 * @param userName
+	 * @param minMentions, numero minimo di menzioni presenti in un post da cercare
+	 * @return jsonInString, array di tweets (post)
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 * @throws IllegalArgumentException
+	 */
 	@GetMapping("/tweets") 
 	public String tweets (@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentions", defaultValue = "0" ) int minMentions) throws IOException, URISyntaxException,IllegalArgumentException  {
 		
@@ -80,7 +98,15 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 
 		return jsonInString;
 	}
-	
+	/**
+	 * 
+	 * @param userName, nome dell'account
+	 * @param userName2, nome dell'account che si vuole cercare quante volte è stato menzionato da userName
+	 * @return userName2, ritorna la stringa userName2 + quante volte è stato menzionato 
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 * @throws IllegalArgumentException
+	 */
 	@GetMapping("/mentioned") 
 	public String mentioned (@RequestParam(value = "userName") String userName, @RequestParam(value = "userName2" ) String userName2) throws IOException, URISyntaxException,IllegalArgumentException  {
 		
@@ -112,9 +138,18 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 		}
 		return userName2+" e' stato menzionato 0 volte";
 	}
-	
+	/**
+	 * 
+	 * @param userName
+	 * @param numOfMostMentioned, numero di account più menzionati da visualizzare
+	 * @return
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 * @throws IllegalArgumentException
+	 */
 	@GetMapping("/mostMentioned")  
-	public String mostMentioned(@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentioned" ) int minMentioned) throws IOException, URISyntaxException,IllegalArgumentException  {
+	public String mostMentioned(@RequestParam(value = "userName") String userName, @RequestParam(value = "numOfMostMentioned" ) int numOfMostMentioned) throws IOException, URISyntaxException,IllegalArgumentException 
+	{
 		
 		
 		User user;
@@ -129,17 +164,14 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 		 if (user.getListTweets()==null) {
 			return "No tweeets found";
 			}
-		 
-		 
-		      
-		        // enter data into hashmap
+		    //riempimento hashmap (AllMentioned)
 		      user.setAllMentioned();
 		      
-		        HashMap<String, Integer> hm1 = user.sortByValue(user.getAllMentioned());
+		        HashMap<String, Integer> allMentionedNew = user.sortByValue(user.getAllMentioned());
 		        int i = 0;
 		        HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>();
-	        for (Map.Entry<String, Integer> aa : hm1.entrySet()) {
-	        		if (i < minMentioned) {
+	        for (Map.Entry<String, Integer> aa : allMentionedNew.entrySet()) {
+	        		if (i < numOfMostMentioned) {
 	        			temp.put(aa.getKey(), aa.getValue());
 	        		}
 	        		i++;
@@ -152,7 +184,7 @@ public String stats (@RequestParam(value = "userName") String userName) throws I
 
 				return jsonInString;
 			
-				}
+	}
 	
 
 

@@ -24,11 +24,11 @@ import TwitterApp.TwitterApp.Modello.Profilo;
 
 
 
-/* questa classe mi da:
+ /* questa classe mi da:
  * 
  * abbiiamo modificato quella classe in modo che permette di ottenere direttamente i post sapendo il username 
  * 
- * */
+ */
 public class TwitterApi {
 
 	 
@@ -45,11 +45,11 @@ public class TwitterApi {
 	
 		  /**
 		   * 
-		   * @param username
-		   * @return Profilo
-		   * @throws IOException
+		   * @param username, prende il nome del profilo
+		   * @return Profilo, ritorna ID profilo
+		   * @throws IOException 
 		   * @throws URISyntaxException
-		   * @throws JsonSyntaxException
+		   * @throws JsonSyntaxException, eccezione per Gson che legge o scrive un elemento non valido
 		   */
 	    public static Profilo getUserProfile(String username) throws IOException, URISyntaxException,JsonSyntaxException {
 	        URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/by/username/%s", username));
@@ -87,7 +87,7 @@ public class TwitterApi {
 	    /**
 	     * 
 	     * @param username
-	     * @return
+	     * @return tweets, ritorna una lista di tweets (post)
 	     * @throws IOException
 	     * @throws URISyntaxException
 	     */
@@ -95,7 +95,7 @@ public class TwitterApi {
 	       Profilo twitterProfile = getUserProfile(username);
 
 	       if (twitterProfile == null) {
-	            throw new IllegalArgumentException("Username nooooot found");
+	            throw new IllegalArgumentException("Username not found");
 	        }
 	       
 
