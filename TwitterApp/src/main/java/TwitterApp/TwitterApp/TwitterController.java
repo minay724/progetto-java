@@ -21,7 +21,7 @@ public class TwitterController {
 	
 	/**
 	 * questo e' un metodo per inizializzare User (classe)
-	 * @param userName
+	 * @param userName, nome del profilo utente (account)
 	 * @return user
 	 * @throws IOException
 	 * @throws URISyntaxException
@@ -35,7 +35,7 @@ public class TwitterController {
 		 }
 	/**
 	 * è una rotta di tipo get che calcola il numero totale e il numero medio di menzioni 
-	 * @param userName
+	 * @param userName, nome del profilo utente (account)
 	 * @return oggettoJson
 	 * @throws IOException
 	 * @throws URISyntaxException
@@ -60,7 +60,7 @@ public class TwitterController {
 	
 	/**
 	 * e' una rotta di tipo get che trova gli ultimi 100 post di un account
-	 * @param userName
+	 * @param userName, nome del profilo utente (account)
 	 * @param minMentions, numero minimo di menzioni presenti in un post da cercare
 	 * @return jsonInString, array di tweets (post)
 	 * @throws IOException
@@ -99,7 +99,7 @@ public class TwitterController {
 	}
 	/**
 	 * 
-	 * @param userName, nome dell'account
+	 * @param userName, nome del profilo utente (account)
 	 * @param userName2, nome dell'account che si vuole cercare quante volte è stato menzionato da userName
 	 * @return userName2, ritorna la stringa userName2 + quante volte è stato menzionato 
 	 * @throws IOException
@@ -139,7 +139,7 @@ public class TwitterController {
 	}
 	/**
 	 * 
-	 * @param userName
+	 * @param userName, nome del profilo utente (account)
 	 * @param numOfMostMentioned, numero di account più menzionati da visualizzare
 	 * @return jsonInString
 	 * @throws IOException

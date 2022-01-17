@@ -40,7 +40,7 @@ public class TwitterApi {
 	
 		  /**
 		   * questo metodo chiama la  v2 di User Tweet timeline endpoint tramite user id
-		   * @param username, prende il nome del profilo
+		   * @param username, nome del profilo utente (account)
 		   * @return Profilo, ritorna ID profilo
 		   * @throws IOException 
 		   * @throws URISyntaxException
@@ -81,7 +81,7 @@ public class TwitterApi {
 
 	    /**
 	     * 
-	     * @param username
+	     * @param username, nome del profilo utente (account)
 	     * @return tweets, ritorna una lista di tweets (post)
 	     * @throws IOException
 	     * @throws URISyntaxException

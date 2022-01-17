@@ -14,7 +14,7 @@ public class Profilo {
 	        return id;
 	    }
 	    /**
-	     * @param id
+	     * @param id, ID del profilo utente (account)
 	     */
 	    public void setId(String id) {
 	        this.id = id;
