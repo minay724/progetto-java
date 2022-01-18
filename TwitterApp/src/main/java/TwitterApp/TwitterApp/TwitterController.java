@@ -21,7 +21,7 @@ public class TwitterController {
 	
 	/**
 	 * questo e' un metodo per inizializzare User (classe)
-	 * @param userName, nome del profilo utente (account)
+	 * @param userName
 	 * @return user
 	 * @throws IOException
 	 * @throws URISyntaxException
@@ -35,7 +35,7 @@ public class TwitterController {
 		 }
 	/**
 	 * è una rotta di tipo get che calcola il numero totale e il numero medio di menzioni 
-	 * @param userName, nome del profilo utente (account)
+	 * @param userName
 	 * @return oggettoJson
 	 * @throws IOException
 	 * @throws URISyntaxException
@@ -60,7 +60,7 @@ public class TwitterController {
 	
 	/**
 	 * e' una rotta di tipo get che trova gli ultimi 100 post di un account
-	 * @param userName, nome del profilo utente (account)
+	 * @param userName
 	 * @param minMentions, numero minimo di menzioni presenti in un post da cercare
 	 * @return jsonInString, array di tweets (post)
 	 * @throws IOException
@@ -68,7 +68,20 @@ public class TwitterController {
 	 * @throws IllegalArgumentException
 	 */
 	@GetMapping("/tweets") 
-	public String tweets (@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentions", defaultValue = "0" ) int minMentions) throws IOException, URISyntaxException,IllegalArgumentException  {
+	public String tweets (@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentions", defaultValue = "0" ) String minMentions) throws IOException, URISyntaxException,IllegalArgumentException  {
+		
+		Integer min_mentions=null;
+		try {
+		min_mentions=Integer.valueOf(minMentions);
+		
+		}catch(Exception e) {
+			return "minMentions deve essere un numero! ";		
+		}		
+		
+		if (min_mentions <0) {
+			return "minMentions deve essere un numero positivo";
+		}
+		
 		
 		User user;
 		try{
@@ -85,7 +98,7 @@ public class TwitterController {
 		ArrayList<Tweet> arrayTweet= new ArrayList<Tweet>();
 		for (Tweet t: user.getListTweets() ) {
 			
-			if (t.getNumOfMentions()>=minMentions) {
+			if (t.getNumOfMentions()>=min_mentions) {
 				arrayTweet.add(t);
 				
 			}
@@ -99,7 +112,7 @@ public class TwitterController {
 	}
 	/**
 	 * 
-	 * @param userName, nome del profilo utente (account)
+	 * @param userName, nome dell'account
 	 * @param userName2, nome dell'account che si vuole cercare quante volte è stato menzionato da userName
 	 * @return userName2, ritorna la stringa userName2 + quante volte è stato menzionato 
 	 * @throws IOException
@@ -139,7 +152,7 @@ public class TwitterController {
 	}
 	/**
 	 * 
-	 * @param userName, nome del profilo utente (account)
+	 * @param userName
 	 * @param numOfMostMentioned, numero di account più menzionati da visualizzare
 	 * @return jsonInString
 	 * @throws IOException
@@ -147,8 +160,21 @@ public class TwitterController {
 	 * @throws IllegalArgumentException
 	 */
 	@GetMapping("/mostMentioned")  
-	public String mostMentioned(@RequestParam(value = "userName") String userName, @RequestParam(value = "numOfMostMentioned" ) int numOfMostMentioned) throws IOException, URISyntaxException,IllegalArgumentException 
+	public String mostMentioned(@RequestParam(value = "userName") String userName, @RequestParam(value = "numOfMostMentioned" ) String numOfMostMentioned) throws IOException, URISyntaxException,IllegalArgumentException 
 	{
+		
+
+		Integer num_of_most_mentioned=null;
+		try {
+			num_of_most_mentioned=Integer.valueOf(numOfMostMentioned);
+		
+		}catch(Exception e) {
+			return "numOfMostMentioned deve essere un numero! ";		
+		}		
+		
+		if (num_of_most_mentioned <0) {
+			return "numOfMostMentioned deve essere un numero positivo";
+		}
 		
 		
 		User user;
@@ -170,7 +196,7 @@ public class TwitterController {
 		        int i = 0;
 		        HashMap<String, Integer> allMentionedCut = new LinkedHashMap<String, Integer>();
 	        for (Map.Entry<String, Integer> aa : allMentionedNew.entrySet()) {
-	        		if (i < numOfMostMentioned) {
+	        		if (i < num_of_most_mentioned) {
 	        			allMentionedCut.put(aa.getKey(), aa.getValue());
 	        		}
 	        		i++;
