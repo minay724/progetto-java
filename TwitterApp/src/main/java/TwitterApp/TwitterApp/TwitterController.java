@@ -82,14 +82,12 @@ public class TwitterController {
 			return "minMentions deve essere un numero positivo";
 		}
 		
-		
 		User user;
 		try{
 			user= initUser(userName);
 		}catch(IllegalArgumentException error) {
 			return "Username not found";
 		}
-		
 		
 		 if (user.getListTweets()==null) {
 			return "No tweeets found";
@@ -130,7 +128,6 @@ public class TwitterController {
 			return "Username not found";
 		}
 		
-		
 		 if (user.getListTweets()==null) {
 			return "No tweeets found";
 			}
@@ -144,8 +141,6 @@ public class TwitterController {
 				 
 				return userName2+" e' stato menzionato "+ numberOfMentions  + " volte";
 			}
-			
-				
 			
 		}
 		return userName2+" e' stato menzionato 0 volte";
@@ -163,7 +158,6 @@ public class TwitterController {
 	public String mostMentioned(@RequestParam(value = "userName") String userName, @RequestParam(value = "numOfMostMentioned" ) String numOfMostMentioned) throws IOException, URISyntaxException,IllegalArgumentException 
 	{
 		
-
 		Integer num_of_most_mentioned=null;
 		try {
 			num_of_most_mentioned=Integer.valueOf(numOfMostMentioned);
@@ -175,7 +169,6 @@ public class TwitterController {
 		if (num_of_most_mentioned <0) {
 			return "numOfMostMentioned deve essere un numero positivo";
 		}
-		
 		
 		User user;
 		try{
@@ -203,14 +196,11 @@ public class TwitterController {
 	            
 	        }
 		 
-		        
 		 Gson gson= new Gson();
 		        String jsonInString = gson.toJson(allMentionedCut);
 
 				return jsonInString;
 			
 	}
-	
-
 
 }

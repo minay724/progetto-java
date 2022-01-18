@@ -22,6 +22,8 @@ public class Tweet {
 	    * @param id l'id dell'account
  		* @param text il testo del tweet (post)
  		*/
+	    
+	    public Tweet() {}
 
 	    public Tweet(String id, String text) {
 	    	
@@ -59,7 +61,7 @@ public class Tweet {
 	    }
 	    /**
 	     * 
-	     * @return mentions
+	     * @return mentions 
 	     */
 	    public Map<String, Integer> getMentions() {
 	        return mentions;
