@@ -115,4 +115,3 @@ public class Tweet {
 			this.mentions = mentions;
 		}
 }
-
