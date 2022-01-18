@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  * 
- *In questa classe abbiamo creato i metodi (get e sit per l' id ed il testo del post)
+ *In questa classe abbiamo creato i metodi (get e set per l' id ed il testo del post)
  */
 public class Tweet {
 	    private String id;
@@ -19,12 +19,12 @@ public class Tweet {
 	    * 1) l'id del post;
 	    * 2)il testo del post;
 	    * 
-	    * @param id l'id dell'account
- 		* @param text il testo del tweet (post)
  		*/
-	    
 	    public Tweet() {}
-
+	    /**
+	     * @param id l'id dell'account
+ 		 * @param text il testo del tweet (post)
+	     */
 	    public Tweet(String id, String text) {
 	    	
 	        this.id = id;

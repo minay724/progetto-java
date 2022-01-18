@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"TwitterApp.TwitterApp.Modello","l":"User"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"TwitterApp.TwitterApp.Modello","l":"Tweet"}];updateSearchResults();
