@@ -74,7 +74,7 @@ public class TwitterController {
 		try {
 		min_mentions=Integer.valueOf(minMentions);
 		
-		}catch(Exception e) {
+		}catch(NumberFormatException e) {
 			return "minMentions deve essere un numero! ";		
 		}		
 		
@@ -162,7 +162,7 @@ public class TwitterController {
 		try {
 			num_of_most_mentioned=Integer.valueOf(numOfMostMentioned);
 		
-		}catch(Exception e) {
+		}catch(NumberFormatException e) {
 			return "numOfMostMentioned deve essere un numero! ";		
 		}		
 		
