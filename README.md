@@ -118,6 +118,7 @@ numOfMostMentioned deve essere un numero positivo
 ```
 numOfMostMentioned deve essere un numero! 
 ```
+***
 Oltre alle eccezioni standard di java abbiamo aggiunto delle eccezioni personalizzate:
 
 - **IOException**
