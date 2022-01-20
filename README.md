@@ -105,6 +105,19 @@ Il codice è stato commentato in Javadoc.
 - **Visual Studio Code** (Ambiente di sviluppo utilizzato per il documento di markdown per il README)
 ***
 ## ECCEZIONI
+#### PROVE ECCEZIONI (esempi errori)
+1. http://localhost:8080/mostMentioned?userName=FCBavASDvrcelona&numOfMostMentioned=5
+```json
+Username not found
+```
+2. http://localhost:8080/mostMentioned?userName=FCBarcelona&numOfMostMentioned=-5
+```json
+numOfMostMentioned deve essere un numero positivo
+```
+3. http://localhost:8080/mostMentioned?userName=FCBarcelona&numOfMostMentioned=kjkj
+```json
+numOfMostMentioned deve essere un numero! 
+```
 Oltre alle eccezioni standard di java abbiamo aggiunto delle eccezioni personalizzate:
 
 - **IOException**
