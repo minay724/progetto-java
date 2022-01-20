@@ -91,7 +91,7 @@ public class Tweet {
 		 */
 	    public void countMentions() {
 	        Map<String, Integer> mentions = new HashMap<String, Integer>();
-//sono stati inseriti tutti i caratteri "speciali" che potrebbero causare problemi nella ricerca dell'account menzionato
+	        //sono stati inseriti tutti i caratteri "speciali" che potrebbero causare problemi nella ricerca dell'account menzionato
 	        String[] specialChars = {".", ",",":", ";","/","\\","_","-"};
 	        for (String word :
 	                this.text.split("\\s+")) {

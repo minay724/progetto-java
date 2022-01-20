@@ -11,7 +11,7 @@ import TwitterApp.TwitterApp.Modello.Tweet;
 @SpringBootTest
 class TwitterAppApplicationTests {
 /**
- * 
+ * Testa il numero di menzioni presenti nel tweet
  */
 	Tweet tweetTest = new Tweet();
 	Map<String, Integer> mentionsTest = new HashMap<String, Integer>();
@@ -32,7 +32,7 @@ class TwitterAppApplicationTests {
 	}
 	
 	/**
-	 * e' un test per testare che sia stato giusto l'inserimento del mention (e il suo valore)
+	 * Testa se è stata inserita correttamente la menzione (nome dell'utente e quante volte è stato menzionato)
 	 */
 	@Test 
 	void testMentions() {

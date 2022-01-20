@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"TwitterApp.TwitterApp.Modello"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"TwitterApp.TwitterApp.Controller"},{"l":"TwitterApp.TwitterApp.Modello"}];updateSearchResults();

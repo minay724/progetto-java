@@ -21,10 +21,10 @@ public class TwitterController {
 	
 	/**
 	 * questo e' un metodo per inizializzare User (classe)
-	 * @param userName
+	 * @param userName nome del profilo utente (account)
 	 * @return user
-	 * @throws IOException
-	 * @throws URISyntaxException
+	 * @throws IOException appare quando si verifica un errore durante le operazioni di lettura, scrittura e ricerca di file o directory
+	 * @throws URISyntaxException si verifica quando si tenta di analizzare una stringa che rappresenta un URI, ma non ha il formato corretto
 	 */
 	private static User initUser(String userName ) throws IOException, URISyntaxException {
 		
@@ -35,10 +35,10 @@ public class TwitterController {
 		 }
 	/**
 	 * è una rotta di tipo get che calcola il numero totale e il numero medio di menzioni 
-	 * @param userName
+	 * @param userName nome del profilo utente (account)
 	 * @return oggettoJson
-	 * @throws IOException
-	 * @throws URISyntaxException
+	 * @throws IOException appare quando si verifica un errore durante le operazioni di lettura, scrittura e ricerca di file o directory
+	 * @throws URISyntaxException si verifica quando si tenta di analizzare una stringa che rappresenta un URI, ma non ha il formato corretto
 	 */
 	@GetMapping("/stats") 
 	public String stats (@RequestParam(value = "userName") String userName) throws IOException, URISyntaxException {
@@ -51,8 +51,8 @@ public class TwitterController {
 	
 	 JsonObject oggettoJson = new JsonObject();
 	 
-	oggettoJson.addProperty("Total_number_of_mentions:", user.totNumOfMentions());
-	oggettoJson.addProperty("Average_number_of_mentions:", user.mediaMentions());
+	oggettoJson.addProperty("Total_number_of_mentions", user.totNumOfMentions());
+	oggettoJson.addProperty("Average_number_of_mentions", user.mediaMentions());
 		
 	return oggettoJson.toString();
 	}
@@ -60,12 +60,12 @@ public class TwitterController {
 	
 	/**
 	 * e' una rotta di tipo get che trova gli ultimi 100 post di un account
-	 * @param userName
-	 * @param minMentions, numero minimo di menzioni presenti in un post da cercare
-	 * @return jsonInString, array di tweets (post)
-	 * @throws IOException
-	 * @throws URISyntaxException
-	 * @throws IllegalArgumentException
+	 * @param userName nome del profilo utente (account)
+	 * @param minMentions numero minimo di menzioni presenti in un post da cercare
+	 * @return jsonInString array di tweets (post)
+	 * @throws IOException appare quando si verifica un errore durante le operazioni di lettura, scrittura e ricerca di file o directory
+	 * @throws URISyntaxException si verifica quando si tenta di analizzare una stringa che rappresenta un URI, ma non ha il formato corretto
+	 * @throws IllegalArgumentException serve per indicare che ad un metodo è stato passato un argomento non corretto
 	 */
 	@GetMapping("/tweets") 
 	public String tweets (@RequestParam(value = "userName") String userName, @RequestParam(value = "minMentions", defaultValue = "0" ) String minMentions) throws IOException, URISyntaxException,IllegalArgumentException  {
@@ -110,12 +110,12 @@ public class TwitterController {
 	}
 	/**
 	 * 
-	 * @param userName, nome dell'account
-	 * @param userName2, nome dell'account che si vuole cercare quante volte è stato menzionato da userName
-	 * @return userName2, ritorna la stringa userName2 + quante volte è stato menzionato 
-	 * @throws IOException
-	 * @throws URISyntaxException
-	 * @throws IllegalArgumentException
+	 * @param userName nome dell'account
+	 * @param userName2 nome dell'account che si vuole cercare quante volte è stato menzionato da userName
+	 * @return userName2 ritorna la stringa userName2 + quante volte è stato menzionato 
+	 * @throws IOException appare quando si verifica un errore durante le operazioni di lettura, scrittura e ricerca di file o directory
+	 * @throws URISyntaxException si verifica quando si tenta di analizzare una stringa che rappresenta un URI, ma non ha il formato corretto
+	 * @throws IllegalArgumentException serve per indicare che ad un metodo è stato passato un argomento non corretto
 	 */
 	@GetMapping("/mentioned") 
 	public String mentioned (@RequestParam(value = "userName") String userName, @RequestParam(value = "userName2" ) String userName2) throws IOException, URISyntaxException,IllegalArgumentException  {
@@ -147,12 +147,12 @@ public class TwitterController {
 	}
 	/**
 	 * 
-	 * @param userName
-	 * @param numOfMostMentioned, numero di account più menzionati da visualizzare
+	 * @param userName nome del profilo utente (account)
+	 * @param numOfMostMentioned numero di account più menzionati da visualizzare
 	 * @return jsonInString
-	 * @throws IOException
-	 * @throws URISyntaxException
-	 * @throws IllegalArgumentException
+	 * @throws IOException appare quando si verifica un errore durante le operazioni di lettura, scrittura e ricerca di file o directory
+	 * @throws URISyntaxException si verifica quando si tenta di analizzare una stringa che rappresenta un URI, ma non ha il formato corretto
+	 * @throws IllegalArgumentException serve per indicare che ad un metodo è stato passato un argomento non corretto
 	 */
 	@GetMapping("/mostMentioned")  
 	public String mostMentioned(@RequestParam(value = "userName") String userName, @RequestParam(value = "numOfMostMentioned" ) String numOfMostMentioned) throws IOException, URISyntaxException,IllegalArgumentException 

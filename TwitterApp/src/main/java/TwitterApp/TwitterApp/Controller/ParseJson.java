@@ -14,7 +14,11 @@ import TwitterApp.TwitterApp.Modello.Profilo;
  */
 
 public class ParseJson {
-
+	/**
+	 *
+	 * @param json stringa json
+	 * @return twitterProfile profilo utente
+	 */
     public static Profilo profile(String json) {
         //creazione oggetto Gson
     	Gson gson = new Gson();
@@ -30,8 +34,8 @@ public class ParseJson {
 
 	/**
 	 * 
-	 * @param json
-	 * @return tweets, ritorna una lista di tweets (post)
+	 * @param json stringa json
+	 * @return tweets ritorna una lista di tweets (post)
 	 */
     public static List<Tweet> tweets(String json) {
 

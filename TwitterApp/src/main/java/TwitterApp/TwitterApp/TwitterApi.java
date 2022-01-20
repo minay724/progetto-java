@@ -40,11 +40,11 @@ public class TwitterApi {
 	
 		  /**
 		   * questo metodo chiama la  v2 di User Tweet timeline endpoint tramite user id
-		   * @param username, nome del profilo utente (account)
-		   * @return Profilo, ritorna ID profilo
-		   * @throws IOException 
-		   * @throws URISyntaxException
-		   * @throws JsonSyntaxException
+		   * @param username nome del profilo utente (account)
+		   * @return Profilo ritorna ID profilo
+		   * @throws IOException appare quando si verifica un errore durante le operazioni di lettura, scrittura e ricerca di file o directory
+		   * @throws URISyntaxException si verifica quando si tenta di analizzare una stringa che rappresenta un URI, ma non ha il formato corretto
+		   * @throws JsonSyntaxException si verifica quando Gson tenta di leggere (o scrivere) un elemento JSON non corretto.
 		   */
 	    public static Profilo getUserProfile(String username) throws IOException, URISyntaxException,JsonSyntaxException {
 	        URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/by/username/%s", username));
@@ -81,10 +81,10 @@ public class TwitterApi {
 
 	    /**
 	     * 
-	     * @param username, nome del profilo utente (account)
-	     * @return tweets, ritorna una lista di tweets (post)
-	     * @throws IOException
-	     * @throws URISyntaxException
+	     * @param username nome del profilo utente (account)
+	     * @return tweets ritorna una lista di tweets (post)
+	     * @throws IOException appare quando si verifica un errore durante le operazioni di lettura, scrittura e ricerca di file o directory
+	     * @throws URISyntaxException si verifica quando si tenta di analizzare una stringa che rappresenta un URI, ma non ha il formato corretto
 	     */
 	    public static List<Tweet> getTweets(String username) throws IOException, URISyntaxException {
 	       Profilo twitterProfile = getUserProfile(username);

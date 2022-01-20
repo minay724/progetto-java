@@ -26,7 +26,7 @@ public class User {
 		return tweetsCount;
 	}
 	/**
-	 * un metodo setTweetsCount
+	 * un metodo set TweetsCount
 	 */
 	public void setTweetsCount() {
 		if (listTweets!=null) {
@@ -44,8 +44,8 @@ public class User {
 		return listTweets;
 	}
 	/**
-	 * @throws IOException eccezioni 
-	 * @throws URISyntaxException eccezioni 
+	 * @throws IOException appare quando si verifica un errore durante le operazioni di lettura, scrittura e ricerca di file o directory
+	 * @throws URISyntaxException si verifica quando si tenta di analizzare una stringa che rappresenta un URI, ma non ha il formato corretto
 	 */
 	public void setListTweets() throws IOException, URISyntaxException {
 		this.listTweets = TwitterApi.getTweets(this.userName);
@@ -66,7 +66,7 @@ public class User {
 	}
 	/**
 	 * è un metodo per calcolare il numero totale di menzioni
-	 * @return somma, ritorna numero totale di menzioni
+	 * @return somma ritorna numero totale di menzioni
 	 */
 	public int totNumOfMentions() {
 		if (this.listTweets == null) {
@@ -113,8 +113,8 @@ public class User {
 	}
 	/**
 	 * metodo per ordinare (per valore) l'hashmap allMentioned
-	 * @param map, allMentioned
-	 * @return temp ritoena allMentioned ordinato
+	 * @param map allMentioned
+	 * @return temp ritorna allMentioned ordinato
 	 */
     public  HashMap<String, Integer>
     sortByValue(Map<String, Integer> map)
