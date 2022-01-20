@@ -5,7 +5,7 @@ Utilizzando l'API Reference Twitter si possono filtrare statistiche _come_:
 - Utenti più menzionati
 - Numero di menzioni nel post
 - Percentuale menzioni nei post
-- Quante volte e' stato menzionato un utente negli ultimi 100 twwtes 
+- Quante volte è stato menzionato un utente negli ultimi 100 tweets 
 
 ***
 ## Plus del programma
